@@ -19,7 +19,7 @@ export const listProducts: Product[] = [
     href: 'https://brokerpe.com',
     title: 'Brokerpe',
     description:
-      'Brokerpe is a platform that aims to facilitar o mercado de capitais brasileiro através da tecnologia.',
+      'Brokerpe is a platform that aims to facilitate the Brazilian capital market through technology.',
     thumbnail: {
       light: '/images/thumbnail-light-brokerpe.png',
       dark: '/images/thumbnail-dark-brokerpe.png',
