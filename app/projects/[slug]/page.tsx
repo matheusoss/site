@@ -1,6 +1,5 @@
 import { Container } from '@/components/container'
 import { SingleProduct } from '@/components/single-product'
-import type { Product } from '@/types/products'
 import { listProducts } from '@/types/products'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
