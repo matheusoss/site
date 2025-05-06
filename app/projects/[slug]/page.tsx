@@ -5,23 +5,24 @@ import { listProducts } from '@/types/products'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
-type Props = {
+export async function generateMetadata({
+  params,
+}: {
   params: { slug: string }
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+}): Promise<Metadata> {
   const slug = params.slug
-  const product = listProducts.find((p) => p.slug === slug) as Product | undefined
+  const product = listProducts.find((p) => p.slug === slug)
+
   if (product) {
     return {
       title: product.title,
       description: product.description,
     }
-  } else {
-    return {
-      title: 'Projects | Matheus Oliveira',
-      description: 'Projects that are active',
-    }
+  }
+
+  return {
+    title: 'Projects | Matheus Oliveira',
+    description: 'Projects that are active',
   }
 }
 
@@ -36,6 +37,7 @@ export default function SingleProjectPage({
   if (!product) {
     redirect('/projects')
   }
+
   return (
     <Container>
       <SingleProduct product={product} />
