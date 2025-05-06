@@ -3,13 +3,17 @@ import { SingleProduct } from '@/components/single-product'
 import { listProducts } from '@/types/products'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
+import { getProducts } from '@/lib/products'
 
-interface PageProps {
-  params: { slug: string }
-  searchParams?: { [key: string]: string | string[] | undefined }
+export async function generateStaticParams() {
+  const products = getProducts()
+
+  return products.map((product) => ({
+    slug: product.slug,
+  }))
 }
 
-export async function generateMetadata(props: PageProps): Promise<Metadata | undefined> {
+export async function generateMetadata(props): Promise<Metadata | undefined> {
   const params = await props.params
   const product = listProducts.find((p) => p.slug === params.slug)
 
