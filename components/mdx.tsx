@@ -1,4 +1,6 @@
 import { MDXRemote } from 'next-mdx-remote/rsc'
+import type { MDXRemoteProps } from 'next-mdx-remote/rsc'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -124,10 +126,7 @@ const components = {
   Table,
   iframe: Iframe,
 }
-
-interface CustomMDXProps {
-  components?: Record<string, React.ComponentType<unknown>>
-}
+type CustomMDXProps = MDXRemoteProps
 
 export function CustomMDX(props: CustomMDXProps) {
   return <MDXRemote {...props} components={{ ...components, ...(props.components || {}) }} />

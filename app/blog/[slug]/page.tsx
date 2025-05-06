@@ -15,7 +15,7 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata(props): Promise<Metadata | undefined> {
+export async function generateMetadata(props: { params: any }): Promise<Metadata | undefined> {
   const params = await props.params
   const post = getBlogPosts().find((post) => post.slug === params.slug)
   if (!post) {
@@ -35,7 +35,7 @@ export async function generateMetadata(props): Promise<Metadata | undefined> {
       url: `${baseUrl}/blog/${post.slug}`,
       images: [
         {
-          url: image,
+          url: image || '',
         },
       ],
     },
@@ -43,7 +43,7 @@ export async function generateMetadata(props): Promise<Metadata | undefined> {
       card: 'summary_large_image',
       title,
       description,
-      images: [image],
+      images: [image || ''],
     },
   }
 }

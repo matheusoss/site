@@ -115,7 +115,7 @@ export const Navigation = ({
 
   return (
     <div className="flex flex-col space-y-1 my-10 relative z-[100]">
-      {navlinks.map((link: Navlink) => (
+      {navlinks.map((link) => (
         <Link
           key={link.href}
           href={link.href}
@@ -133,7 +133,7 @@ export const Navigation = ({
       <Heading as="p" className="text-sm md:text-sm lg:text-sm pt-10 px-2">
         Socials
       </Heading>
-      {socials.map((link: Navlink) => (
+      {socials.map((link) => (
         <Link
           key={link.href}
           href={link.href}

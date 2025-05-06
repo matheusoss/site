@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import type { JSX } from 'react/jsx-runtime'
 
 export const Heading = ({
   children,

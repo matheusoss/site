@@ -43,7 +43,7 @@ const popupCenter = ({ url, title, w, h }: { url: string; title: string; w: numb
   return newWindow
 }
 
-export function UpdatesToolbar({ posts }) {
+export function UpdatesToolbar({ posts }: { posts: any[] }) {
   const pathname = usePathname()
   const currentIndex = posts.findIndex((a) => pathname.endsWith(a.slug)) ?? 0
 

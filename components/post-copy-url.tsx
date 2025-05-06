@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { IoCheckmarkDoneOutline } from 'react-icons/io5'
 
-export function PostCopyURL() {
+export function PostCopyURL({ slug }: { slug: string }) {
   const [isCopied, setCopied] = useState(false)
 
   const handleClipboard = async () => {

@@ -37,7 +37,12 @@ function parseFrontmatter(fileContent: string) {
                     const parsedValue = JSON.parse(value)
                     metadata[trimmedKey] = parsedValue
                 } catch {
-                    metadata[trimmedKey] = value
+                    // Se não conseguir fazer o parse como JSON, tenta converter para array
+                    if (trimmedKey === 'images') {
+                        metadata[trimmedKey] = [{ light: value, dark: value }]
+                    } else {
+                        metadata[trimmedKey] = { light: value, dark: value }
+                    }
                 }
             } else if (trimmedKey === 'stack') {
                 metadata[trimmedKey] = value.split(',').map(item => item.trim())

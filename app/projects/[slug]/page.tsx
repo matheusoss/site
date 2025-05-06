@@ -13,7 +13,7 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata(props): Promise<Metadata | undefined> {
+export async function generateMetadata(props:{ params: any }): Promise<Metadata | undefined> {
   const params = await props.params
   const product = listProducts.find((p) => p.slug === params.slug)
 
