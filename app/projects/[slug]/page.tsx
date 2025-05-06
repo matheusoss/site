@@ -4,12 +4,13 @@ import { listProducts } from '@/types/products'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
-export async function generateMetadata({
-  params,
-}: {
+type Props = {
   params: { slug: string }
-}): Promise<Metadata> {
-  const slug = params.slug
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = await params.slug
   const product = listProducts.find((p) => p.slug === slug)
 
   if (product) {
@@ -25,11 +26,7 @@ export async function generateMetadata({
   }
 }
 
-export default function SingleProjectPage({
-  params,
-}: {
-  params: { slug: string }
-}) {
+export default function SingleProjectPage({ params }: Props) {
   const slug = params.slug
   const product = listProducts.find((p) => p.slug === slug)
 
