@@ -1,8 +1,8 @@
 import { Container } from '@/components/container'
 import { Heading } from '@/components/heading'
+import { Highlight } from '@/components/highlight'
 import { Paragraph } from '@/components/paragraph'
 import { WorkResume } from '@/components/work-resume'
-import { Highlight } from '@/components/highlight'
 export default function Resume() {
   return (
     <Container>

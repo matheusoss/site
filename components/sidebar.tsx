@@ -1,12 +1,6 @@
 'use client'
 
-import { AnimatePresence, motion } from 'framer-motion'
-import Link from 'next/link'
-import { useState } from 'react'
 import { cn } from '@/lib/utils'
-import { usePathname } from 'next/navigation'
-import { Heading } from './heading'
-import { Badge } from './ui/badge'
 import {
   IconBrandGithub,
   IconBrandLinkedin,
@@ -15,7 +9,13 @@ import {
   IconLayoutSidebarRightCollapse,
 } from '@tabler/icons-react'
 import { IconArticle, IconBolt, IconBriefcase2, IconMail, IconMessage2 } from '@tabler/icons-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useState } from 'react'
+import { Heading } from './heading'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import { Badge } from './ui/badge'
 import { InteractiveHoverButton } from './ui/interactive-hover-button'
 
 const isMobile = () => {

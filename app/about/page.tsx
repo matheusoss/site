@@ -1,7 +1,7 @@
+import About from '@/components/About'
 import { Container } from '@/components/container'
 import { Heading } from '@/components/heading'
 import type { Metadata } from 'next'
-import About from '@/components/About'
 
 export const metadata: Metadata = {
   title: 'About | Matheus Oliveira',

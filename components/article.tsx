@@ -1,6 +1,6 @@
 import { ArticleInView } from '@/components/article-in-view'
 import { CustomMDX } from '@/components/mdx'
-import { PostStatus } from '@/components/post-status' 
+import { PostStatus } from '@/components/post-status'
 import Image from 'next/image'
 import Link from 'next/link'
 

@@ -1,8 +1,8 @@
 import { Heading } from '@/components/heading'
-import { Paragraph } from '@/components/paragraph'
 import { Highlight } from '@/components/highlight'
-import { TechStack } from '@/components/techstack'
+import { Paragraph } from '@/components/paragraph'
 import { Products } from '@/components/products'
+import { TechStack } from '@/components/techstack'
 import { IconMapPinFilled } from '@tabler/icons-react'
 
 export default function Home() {

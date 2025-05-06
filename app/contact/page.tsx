@@ -1,8 +1,8 @@
+import { Cal } from '@/components/cal'
 import { Container } from '@/components/container'
 import { Heading } from '@/components/heading'
-import { Cal } from '@/components/cal'
-import { Paragraph } from '@/components/paragraph'
 import { Highlight } from '@/components/highlight'
+import { Paragraph } from '@/components/paragraph'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {

@@ -1,5 +1,5 @@
-import Image from 'next/image'
 import { PostCopyURL } from '@/components/post-copy-url'
+import Image from 'next/image'
 
 const getAuthor = (id: string) =>
   ({

@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import Image from 'next/image'
 import type { Product } from '@/types/products'
-import { Paragraph } from './paragraph'
+import { motion } from 'framer-motion'
 import { useTheme } from 'next-themes'
+import Image from 'next/image'
+import { useState } from 'react'
+import { Paragraph } from './paragraph'
 import { Badge } from './ui/badge'
 
 export const SingleProduct = ({ product }: { product: Product }) => {

@@ -1,9 +1,9 @@
 'use client'
 
 import { Icons } from '@/components/icons'
-import { IoCheckmarkDoneOutline } from 'react-icons/io5'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { IoCheckmarkDoneOutline } from 'react-icons/io5'
 
 export function PostCopyURL() {
   const [isCopied, setCopied] = useState(false)

@@ -1,13 +1,13 @@
 'use client'
 
 import {
-  BiLogoPython,
-  BiLogoReact,
-  BiLogoTypescript,
+  BiLogoAws,
   BiLogoDocker,
   BiLogoPostgresql,
+  BiLogoPython,
+  BiLogoReact,
   BiLogoTailwindCss,
-  BiLogoAws,
+  BiLogoTypescript,
 } from 'react-icons/bi'
 import { RiNextjsFill } from 'react-icons/ri'
 import { SiApacheairflow } from 'react-icons/si'

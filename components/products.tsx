@@ -1,12 +1,12 @@
 'use client'
 
+import { listProducts } from '@/types/products'
 import { motion } from 'framer-motion'
-import { Heading } from './heading'
+import Image from 'next/image'
 import Link from 'next/link'
+import { Heading } from './heading'
 import { Paragraph } from './paragraph'
 import { Badge } from './ui/badge'
-import { listProducts } from '@/types/products'
-import Image from 'next/image'
 export const Products = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-10  hover:bg-neutral-100  dark:hover:bg-neutral-800 rounded-2xl">
