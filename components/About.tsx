@@ -37,37 +37,29 @@ export default function About() {
 
       <div className="max-w-4xl">
         <Paragraph className=" mt-4">
-          Hey there, I&apos;m John Doe - a passionate developer, avid writer, and a connoisseur of awesome design.
-          Welcome to my corner of the digital world!
+          Hey there, I&apos;m Matheus Oliveira - a developer with a passion for technology and soccer!
         </Paragraph>
         <Paragraph className=" mt-4">
-          Since the early days of my journey, I&apos;ve been captivated by the art of crafting exceptional digital
-          experiences. As a developer, I thrive on turning lines of code into functional and elegant solutions. My goal
-          is to not just create software, but to build digital marvels that seamlessly merge form and function.
+          I started my journey as an economist, but I've always liked technology so I always studied it on the side,
+          until one day a director where I worked said "you're in the wrong place and you don't know it". I doubted him,
+          but he was right, I really was in the wrong place.
         </Paragraph>
 
         <Paragraph className=" mt-4">
-          But my journey doesn&apos;t stop at coding. With a heart full of words and a mind brimming with ideas,
-          I&apos;ve ventured into the realm of writing. From tech articles that unravel complex concepts to creative
-          tales that ignite the imagination, I weave words to inform, entertain, and inspire.
+          I discovered that by programming I can have the world at my fingertips, that for me is wonderful, being able
+          to create anything at any time is priceless.
         </Paragraph>
         <Paragraph className=" mt-4">
-          What sets me apart is my unwavering appreciation for design. I believe that aesthetics and usability go hand
-          in hand. My eye for awesome design ensures that every project I undertake not only works flawlessly under the
-          hood but also looks stunning on the surface.
-        </Paragraph>
-        <Paragraph className=" mt-4">
-          Through this website, I aim to share my insights, experiences, and creations with you. Whether you&apos;re a
-          fellow developer seeking solutions, a fellow writer in search of inspiration, or simply someone who
-          appreciates the finer aspects of design, there&apos;s something here for you.
+          Through this website, I intend to share my insights, experiences and creations with you. Whether you're a
+          fellow developer looking for solutions, looking for inspiration or simply someone who appreciates other
+          aspects of technology itself, there's something here for you.
         </Paragraph>
         <Paragraph className=" mt-4">
           Join me on this journey of bytes and narratives, logic and creativity, code and prose. Together, we can
-          explore the boundless possibilities of technology and storytelling, all while reveling in the sheer beauty of
-          thoughtful design.
+          explore the limitless possibilities of technology and storytelling.
         </Paragraph>
         <Paragraph className=" mt-4">
-          Thank you for being here, and I can&apos;t wait to embark on this adventure with you.
+          Thank you for being here and I can't wait to embark on this adventure with you.
         </Paragraph>
       </div>
     </div>
