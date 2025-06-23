@@ -4,7 +4,7 @@ import { ArrowRightIcon, Loader2Icon } from 'lucide-react';
 import { Form } from 'radix-ui';
 import { useActionState, useEffect } from 'react';
 import { toast } from 'sonner';
-import { subscribe } from '@/app/actions/subscribe';
+import { subscribe } from '@/app/[locale]/actions/subscribe';
 import { Input } from '@/components/input';
 
 const initialState = {
