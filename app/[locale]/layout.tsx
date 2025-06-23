@@ -9,8 +9,8 @@ import { Navigation } from '@/components/navigation';
 import { ThemeSwitcher } from '@/components/theme-switcher';
 import { WindowsEmojiPolyfill } from '@/components/windows-emoji-polyfill';
 import { mono, sans } from '@/lib/fonts';
+import { getDictionary } from '@/lib/get-dictionary';
 import { cn } from '@/lib/utils';
-
 import { Providers } from './providers';
 
 export const metadata: Metadata = {
@@ -26,6 +26,8 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }>) {
   const { locale } = await params;
+  const dictionary = await getDictionary(locale);
+
   return (
     <html className="scroll-smooth" lang={locale} suppressHydrationWarning>
       <body
@@ -37,7 +39,7 @@ export default async function RootLayout({
       >
         <Providers locale={locale}>
           <div className="mx-auto grid max-w-2xl gap-12 px-4 py-8 pb-12 sm:px-8">
-            <Navigation />
+            <Navigation dictionary={dictionary} />
             {children}
             <Footer />
           </div>
@@ -45,7 +47,7 @@ export default async function RootLayout({
           <ThemeSwitcher />
           <WindowsEmojiPolyfill />
           <JsonLd />
-          <Analytics debug={true} />
+          <Analytics />
         </Providers>
       </body>
     </html>
