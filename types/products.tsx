@@ -1,18 +1,18 @@
 type ProductImage = {
-  light: string
-  dark: string
-}
+  light: string;
+  dark: string;
+};
 
 export type Product = {
-  title: string
-  description: string
-  thumbnail: ProductImage
-  images: ProductImage[]
-  href: string
-  slug?: string
-  stack?: string[]
-  content?: React.ReactNode | string
-}
+  title: string;
+  description: string;
+  thumbnail: ProductImage;
+  images: ProductImage[];
+  href: string;
+  slug?: string;
+  stack?: string[];
+  content?: React.ReactNode | string;
+};
 
 export const listProducts: Product[] = [
   {
@@ -30,14 +30,22 @@ export const listProducts: Product[] = [
         dark: '/images/brokerpe-site-dark.png',
       },
     ],
-    stack: ['Next.js', 'Tailwind CSS', 'TypeScript', 'Shadcn UI', 'Supabase', 'Stripe'],
+    stack: [
+      'Next.js',
+      'Tailwind CSS',
+      'TypeScript',
+      'Shadcn UI',
+      'Supabase',
+      'Stripe',
+    ],
     slug: 'brokerpe',
     content: (
       <div>
         <p>
-          Brokerpe is a platform that aims to facilitar o mercado de capitais brasileiro através da tecnologia.
+          Brokerpe is a platform that aims to facilitar o mercado de capitais
+          brasileiro através da tecnologia.
         </p>{' '}
       </div>
     ),
   },
-]
+];

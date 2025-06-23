@@ -28,5 +28,5 @@ export const social = {
     href: 'https://www.tiktok.com/@matheuoss',
     follow: false,
     invert: false,
-  }
+  },
 };

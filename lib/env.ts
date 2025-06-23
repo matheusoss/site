@@ -10,8 +10,7 @@ export const env = createEnv({
     // Added by Vercel
     PROJECT_URL: z.string().min(1),
   },
-  client: {
-  },
+  client: {},
   runtimeEnv: {
     PROJECT_URL: process.env.PROJECT_URL,
     RESEND_API_KEY: process.env.RESEND_API_KEY,

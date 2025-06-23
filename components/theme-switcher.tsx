@@ -1,22 +1,22 @@
-'use client'
+'use client';
 
-import { cn } from '@/lib/utils'
-import { Monitor, Moon, Sun } from 'lucide-react'
-import { motion } from 'motion/react'
-import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
+import { Monitor, Moon, Sun } from 'lucide-react';
+import { motion } from 'motion/react';
+import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
+import { cn } from '@/lib/utils';
 
 export function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   // Prevent hydration mismatch
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   if (!mounted) {
-    return null
+    return null;
   }
 
   const themes = [
@@ -35,7 +35,7 @@ export function ThemeSwitcher() {
       icon: Moon,
       label: 'Dark theme',
     },
-  ]
+  ];
 
   return (
     <div
@@ -48,27 +48,32 @@ export function ThemeSwitcher() {
       )}
     >
       {themes.map(({ key, icon: Icon, label }) => {
-        const isActive = theme === key
+        const isActive = theme === key;
 
         return (
           <button
-            type="button"
-            key={key}
-            className="relative size-6 shrink-0 cursor-pointer rounded-full"
-            onClick={() => setTheme(key)}
             aria-label={label}
+            className="relative size-6 shrink-0 cursor-pointer rounded-full"
+            key={key}
+            onClick={() => setTheme(key)}
+            type="button"
           >
             {isActive && (
               <motion.div
-                layoutId="activeTheme"
                 className="absolute inset-0 rounded-full bg-secondary"
+                layoutId="activeTheme"
                 transition={{ type: 'spring', duration: 0.5 }}
               />
             )}
-            <Icon className={cn('relative m-auto h-4 w-4', isActive ? 'text-foreground' : 'text-foreground-lighter')} />
+            <Icon
+              className={cn(
+                'relative m-auto h-4 w-4',
+                isActive ? 'text-foreground' : 'text-foreground-lighter'
+              )}
+            />
           </button>
-        )
+        );
       })}
     </div>
-  )
+  );
 }

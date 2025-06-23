@@ -1,20 +1,36 @@
-'use client'
+'use client';
 
-import { cn } from '@/lib/utils'
-import type { ImageProps } from 'next/image'
-import Image from 'next/image'
+import type { ImageProps } from 'next/image';
+import Image from 'next/image';
+import { cn } from '@/lib/utils';
 
 interface DynamicImageProps extends Omit<ImageProps, 'src' | 'className'> {
-  lightSrc: ImageProps['src']
-  darkSrc: ImageProps['src']
-  className?: string
+  lightSrc: ImageProps['src'];
+  darkSrc: ImageProps['src'];
+  className?: string;
 }
 
-export function DynamicImage({ lightSrc, darkSrc, alt, className, ...props }: DynamicImageProps) {
+export function DynamicImage({
+  lightSrc,
+  darkSrc,
+  alt,
+  className,
+  ...props
+}: DynamicImageProps) {
   return (
     <>
-      <Image src={lightSrc} alt={alt} className={cn('dark:hidden rounded-lg', className)} {...props} />
-      <Image src={darkSrc} alt={alt} className={cn('hidden dark:block rounded-lg', className)} {...props} />
+      <Image
+        alt={alt}
+        className={cn('rounded-lg dark:hidden', className)}
+        src={lightSrc}
+        {...props}
+      />
+      <Image
+        alt={alt}
+        className={cn('hidden rounded-lg dark:block', className)}
+        src={darkSrc}
+        {...props}
+      />
     </>
-  )
+  );
 }

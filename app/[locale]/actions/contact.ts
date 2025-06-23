@@ -1,11 +1,11 @@
 'use server';
 
-import { env } from '@/lib/env';
-import { resend } from '@/lib/resend';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 import { revalidatePath } from 'next/cache';
 import { headers } from 'next/headers';
+import { env } from '@/lib/env';
+import { resend } from '@/lib/resend';
 
 const verifyRecaptcha = async (token: string) => {
   const recaptchaUrl = new URL(
