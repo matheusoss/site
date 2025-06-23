@@ -1,35 +1,55 @@
-import { Article } from '@/components/article'
-import { UpdatesToolbar } from '@/components/updates-toolbar'
-import { getBlogPosts } from '@/lib/blog'
-import type { Metadata } from 'next'
+import { allPosts } from 'content-collections';
+import type { Metadata } from 'next';
+import { Post } from '@/components/post';
+import { Section } from '@/components/section';
+import { createMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  title: 'Blog',
-  description: 'Blog de Matheus Oliveira',
-}
-
-export default async function Page() {
-  const data = getBlogPosts()
-
-  const posts = data
-    .sort((a, b) => {
-      if (new Date(a.metadata.publishedAt) < new Date(b.metadata.publishedAt)) {
-        return -1
+const postsByYear = allPosts
+  .sort((a, b) => b.date.getTime() - a.date.getTime())
+  .reduce(
+    (acc, post) => {
+      const year = post.date.getFullYear();
+      if (!acc[year]) {
+        acc[year] = [];
       }
-      return 1
-    })
-    .map((post, index) => <Article data={post} firstPost={index === 0} key={post.slug} />)
+      acc[year].push(post);
+      return acc;
+    },
+    {} as Record<number, typeof allPosts>
+  );
 
-  return (
-    <div className="container flex justify-center scroll-smooth">
-      <div className="max-w-[680px] pt-[80px] md:pt-[150px] w-full">{posts}</div>
+const title = 'Blog';
+const description = 'Thoughts, stories and ideas.';
 
-      <UpdatesToolbar
-        posts={data.map((post) => ({
-          slug: post.slug,
-          title: post.metadata.title,
-        }))}
-      />
-    </div>
-  )
-}
+export const metadata: Metadata = createMetadata({
+  title,
+  description,
+  ogText: 'My blog — thoughts, stories and ideas.',
+});
+
+const Posts = () => (
+  <>
+    <Section className="gap-0">
+      <h1>{title}</h1>
+      <p className="text-foreground-lighter">{description}</p>
+    </Section>
+    {Object.entries(postsByYear)
+      .sort(([a], [b]) => Number(b) - Number(a))
+      .map(([year, posts], index) => (
+        <Section delay={(index + 1) * 0.2} key={year}>
+          <h2 className="font-normal text-foreground-lighter text-sm">
+            {year}
+          </h2>
+          <ul className="grid gap-6">
+            {posts.map((post) => (
+              <li key={post._meta.path}>
+                <Post {...post} />
+              </li>
+            ))}
+          </ul>
+        </Section>
+      ))}
+  </>
+);
+
+export default Posts;

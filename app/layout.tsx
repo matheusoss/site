@@ -1,43 +1,54 @@
-import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import './globals.css'
-import { Providers } from '@/app/providers'
-import { Sidebar } from '@/components/sidebar'
+import type { Metadata } from 'next';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
+import './globals.css';
+import { Analytics } from '@vercel/analytics/react';
+import { ThemeProvider } from 'next-themes';
+import { Toaster } from 'sonner';
+import { Footer } from '@/components/footer';
+import { JsonLd } from '@/components/json-ld';
+import { Navigation } from '@/components/navigation';
+import { ThemeSwitcher } from '@/components/theme-switcher';
+import { WindowsEmojiPolyfill } from '@/components/windows-emoji-polyfill';
+import { mono, sans } from '@/lib/fonts';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Matheus Oliveira',
   description: 'Software & Data Engineer',
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html className="scroll-smooth" lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} whitespace-pre-line h-screen overscroll-none overflow-hidden flex antialiased bg-background`}
+        className={cn(
+          sans.variable,
+          mono.variable,
+          'bg-background font-sans text-foreground-light leading-relaxed antialiased'
+        )}
       >
-        <Providers>
-          <Sidebar />
-          <div className="lg:pl-2 lg:pt-2  bg-neutral-100 dark:bg-neutral-900 flex-1 overflow-y-auto">
-            <div className="flex-1 bg-background min-h-screen lg:rounded-tl-xl border border-transparent lg:border-neutral-200 dark:border-neutral-800 overflow-y-auto">
-              {children}
-            </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+          enableSystem
+        >
+          <div className="mx-auto grid max-w-2xl gap-12 px-4 py-8 pb-12 sm:px-8">
+            <Navigation />
+            {children}
+            <Footer />
           </div>
-        </Providers>
+          <Toaster />
+          <ThemeSwitcher />
+          <WindowsEmojiPolyfill />
+          <JsonLd />
+          <Analytics debug={true} />
+        </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

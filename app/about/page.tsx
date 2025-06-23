@@ -1,20 +1,33 @@
-import About from '@/components/About'
-import { Container } from '@/components/container'
-import { Heading } from '@/components/heading'
-import type { Metadata } from 'next'
+import { allPages } from 'content-collections';
+import type { Metadata } from 'next';
+import { Mdx } from '@/components/mdx';
+import { Section } from '@/components/section';
+import { createMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  title: 'About | Matheus Oliveira',
-  description:
-    'Matheus Oliveira is a developer, writer and speaker. He is a digital nomad and travels around the world while working remotely.',
+const page = allPages.find((page) => page._meta.fileName === 'about.mdx');
+
+if (!page) {
+  throw new Error('About page not found');
 }
 
-export default function AboutPage() {
-  return (
-    <Container>
-      <span className="text-4xl">💬</span>
-      <Heading className="font-black">About Me</Heading>
-      <About />
-    </Container>
-  )
-}
+export const metadata: Metadata = createMetadata({
+  title: page.title,
+  description: page.description,
+  image: `/og?title=${page.title}&description=${page.description}`,
+});
+
+const AboutPage = () => (
+  <>
+    <Section className="gap-0">
+      <h1>{page.title}</h1>
+      <p className="text-foreground-lighter">{page.description}</p>
+    </Section>
+    <article>
+      <Section>
+        <Mdx code={page.body} />
+      </Section>
+    </article>
+  </>
+);
+
+export default AboutPage;

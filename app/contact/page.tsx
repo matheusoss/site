@@ -1,24 +1,36 @@
-import { Cal } from '@/components/cal'
-import { Container } from '@/components/container'
-import { Heading } from '@/components/heading'
-import { Highlight } from '@/components/highlight'
-import { Paragraph } from '@/components/paragraph'
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import { Cal } from '@/components/cal';
+import { Link } from '@/components/link';
+import { Section } from '@/components/section';
+import { createMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
-  title: 'Contact | Matheus Oliveira',
-  description: 'Contact me',
-}
+const title = 'Contact';
+const email = 'matheusoss@hotmail.com';
+const description = `Contact me by email ${email} or schedule a meeting.`;
+
+export const metadata: Metadata = createMetadata({
+  title,
+  description,
+  ogText: 'Want to chat about something? Get in touch.',
+});
 
 export default function Contact() {
   return (
-    <Container>
-      <span className="text-4xl">✉️</span>
-      <Heading className="font-black mb-2">Contact Me</Heading>
-      <Paragraph className="mb-10 max-w-xl">
-        Contact me by email <Highlight>matheusoss@hotmail.com</Highlight> or schedule a meeting.
-      </Paragraph>
-      <Cal />
-    </Container>
-  )
+    <>
+      <Section className="gap-0">
+        <h1>{title}</h1>
+        <p className="text-foreground-lighter">
+          Contact me by email <Link href={`mailto:${email}`}>{email}</Link> or
+          schedule a meeting.
+        </p>
+      </Section>
+
+      <Section delay={0.2}>
+        <Suspense fallback={null}>
+          <Cal />
+        </Suspense>
+      </Section>
+    </>
+  );
 }
