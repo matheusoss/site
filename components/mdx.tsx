@@ -4,6 +4,7 @@ import type { HTMLProps, ReactNode } from 'react';
 import { Tweet } from 'react-tweet';
 import { Features } from '@/components/features';
 import { Link } from '@/components/link';
+import { Localized } from '@/components/localized';
 import { MailingList } from '@/components/mailing-list';
 import { Stack } from '@/components/stack';
 import { Video } from '@/components/video';
@@ -110,6 +111,7 @@ export const Mdx = ({ code }: MdxProperties) => (
       Stack,
       MailingList,
       Features,
+      Localized,
     }}
   />
 );
