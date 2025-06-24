@@ -69,7 +69,7 @@ export default async function Page({ params }: PageProperties) {
 
       <Section className="gap-0">
         <div className="flex items-center gap-0">
-          <PostStatus status={page.tag ?? ''} />
+          <PostStatus status={page.tags ?? ''} />
         </div>
         <h1>{page.title}</h1>
 
@@ -105,7 +105,7 @@ export default async function Page({ params }: PageProperties) {
             <span>{page.readingTime}</span>
           </div>
 
-          <PostCopyURL slug={page._meta.path} />
+          <PostCopyURL />
         </div>
       </Section>
     </>

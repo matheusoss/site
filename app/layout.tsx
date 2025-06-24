@@ -15,34 +15,34 @@ type RootLayoutProps = {
   children: ReactNode;
 };
 
-const RootLayout = ({ children }: RootLayoutProps) => (
-  <html className="scroll-smooth" lang="en" suppressHydrationWarning>
-    <body
-      className={cn(
-        sans.variable,
-        mono.variable,
-        'bg-background font-sans text-foreground-light leading-relaxed antialiased'
-      )}
-    >
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        disableTransitionOnChange
-        enableSystem
+export default function RootLayout({ children }: RootLayoutProps) {
+  return (
+    <html className="scroll-smooth" lang="pt-BR" suppressHydrationWarning>
+      <body
+        className={cn(
+          sans.variable,
+          mono.variable,
+          'bg-background font-sans text-foreground-light leading-relaxed antialiased'
+        )}
       >
-        <div className="mx-auto grid max-w-2xl gap-12 px-4 py-8 pb-12 sm:px-8">
-          <Navigation />
-          {children}
-          <Footer />
-        </div>
-        <Toaster />
-        <ThemeSwitcher />
-        <WindowsEmojiPolyfill />
-        <JsonLd />
-        <Analytics />
-      </ThemeProvider>
-    </body>
-  </html>
-);
-
-export default RootLayout;
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+          enableSystem
+        >
+          <div className="mx-auto grid max-w-2xl gap-12 px-4 py-8 pb-12 sm:px-8">
+            <Navigation />
+            {children}
+            <Footer />
+          </div>
+          <Toaster />
+          <ThemeSwitcher />
+          <WindowsEmojiPolyfill />
+          <JsonLd />
+          <Analytics />
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}

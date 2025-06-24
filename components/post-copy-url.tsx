@@ -17,7 +17,8 @@ export function PostCopyURL() {
       setTimeout(() => {
         setCopied(false);
       }, 2000);
-    } catch {}
+    } catch {
+    }
   };
 
   return (

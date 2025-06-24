@@ -7,27 +7,6 @@ import { headers } from 'next/headers';
 import { env } from '@/lib/env';
 import { resend } from '@/lib/resend';
 
-const verifyRecaptcha = async (token: string) => {
-  const recaptchaUrl = new URL(
-    'https://www.google.com/recaptcha/api/siteverify'
-  );
-
-  recaptchaUrl.searchParams.set('secret', env.RECAPTCHA_SECRET_KEY);
-  recaptchaUrl.searchParams.set('response', token);
-
-  const recaptchaResponse = await fetch(recaptchaUrl, {
-    method: 'POST',
-  });
-
-  const recaptchaJson = await recaptchaResponse.json();
-
-  if (!recaptchaJson.success) {
-    return {
-      error: 'Please verify that you are human.',
-      message: '',
-    };
-  }
-};
 
 export const contact = async (
   formData: FormData
@@ -54,7 +33,7 @@ export const contact = async (
     };
   }
 
-  const { name, email, message, subject, token } = Object.fromEntries(formData);
+  const { name, email, message, subject } = Object.fromEntries(formData);
 
   // This is a honeypot field - if it's filled, it's likely a bot.
   // Fuck you, bots.
@@ -75,15 +54,6 @@ export const contact = async (
       message: '',
     };
   }
-
-  if (typeof token !== 'string') {
-    return {
-      error: 'Please verify that you are human.',
-      message: '',
-    };
-  }
-
-  await verifyRecaptcha(token);
 
   const response = await resend.emails.send({
     from: env.RESEND_TO,

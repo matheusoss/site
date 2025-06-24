@@ -4,28 +4,40 @@ import { Mdx } from '@/components/mdx';
 import { Section } from '@/components/section';
 import { createMetadata } from '@/lib/metadata';
 
-const page = allPages.find((page) => page._meta.fileName === 'projects.mdx');
+export const metadata: Metadata = (() => {
+  const projectPage = allPages.find(
+    (page) => page._meta.fileName === 'projects.mdx'
+  );
 
-if (!page) {
-  throw new Error('Projects page not found');
-}
+  if (!projectPage) {
+    throw new Error('Projects page not found');
+  }
 
-export const metadata: Metadata = createMetadata({
-  title: page.title,
-  description: page.description,
-  image: `/og?title=${page.title}&description=${page.description}`,
-});
+  return createMetadata({
+    title: projectPage.title,
+    description: projectPage.description,
+    image: `/og?title=${projectPage.title}&description=${projectPage.description}`,
+  });
+})();
 
 export default function ProjectsPage() {
+  const projectPage = allPages.find(
+    (page) => page._meta.fileName === 'projects.mdx'
+  );
+
+  if (!projectPage) {
+    throw new Error('Projects page not found');
+  }
+
   return (
     <>
       <Section className="gap-0">
-        <h1>{page.title}</h1>
-        <p className="text-foreground-lighter">{page.description}</p>
+        <h1>{projectPage.title}</h1>
+        <p className="text-foreground-lighter">{projectPage.description}</p>
       </Section>
       <article>
         <Section>
-          <Mdx code={page.body} />
+          <Mdx code={projectPage.body} />
         </Section>
       </article>
     </>

@@ -18,33 +18,33 @@ export const metadata: Metadata = createMetadata({
   image: `/og?title=${page.title}&description=${page.description}`,
 });
 
-export default function HomePage() {
-  return (
-    <>
-      <Section className="flex items-center gap-4">
-        <Image
-          alt="avatar"
-          className="size-10 rounded-full"
-          height={40}
-          placeholder="blur"
-          priority
-          src={matheusImg}
-          width={40}
-        />
-        <div>
-          <p className="font-medium text-foreground leading-normal">
-            Matheus Oliveira
-          </p>
-          <p className="text-foreground-lighter text-sm leading-normal">
-            Fundador e CEO da <a href="https://brokerpe.com">Brokerpe</a>.
-          </p>
-        </div>
+const HomePage = () => (
+  <>
+    <Section className="flex items-center gap-4">
+      <Image
+        alt=""
+        className="size-10 rounded-full"
+        height={40}
+        placeholder="blur"
+        priority
+        src={matheusImg}
+        width={40}
+      />
+      <div>
+        <p className="font-medium text-foreground leading-normal">
+          Matheus Oliveira
+        </p>
+        <p className="text-foreground-lighter text-sm leading-normal">
+          Fundador e CEO da <a href="https://brokerpe.com">Brokerpe</a>.
+        </p>
+      </div>
+    </Section>
+    <article>
+      <Section delay={0.2}>
+        <Mdx code={page.body} />
       </Section>
-      <article>
-        <Section delay={0.2}>
-          <Mdx code={page.body} />
-        </Section>
-      </article>
-    </>
-  );
-}
+    </article>
+  </>
+);
+
+export default HomePage;

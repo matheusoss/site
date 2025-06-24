@@ -22,21 +22,9 @@ const pages = defineCollection({
   name: 'pages',
   directory: 'content',
   include: 'pages/*.mdx',
-  schema: (schemaZod) => ({
-    title: schemaZod.union([
-      schemaZod.string(),
-      schemaZod.object({
-        en: schemaZod.string(),
-        pt: schemaZod.string(),
-      }),
-    ]),
-    description: schemaZod.union([
-      schemaZod.string(),
-      schemaZod.object({
-        en: schemaZod.string(),
-        pt: schemaZod.string(),
-      }),
-    ]),
+  schema: (z) => ({
+    title: z.string(),
+    description: z.string(),
   }),
   transform: async (page, context) => {
     const body = await compileMDX(context, page, {
@@ -60,7 +48,7 @@ const posts = defineCollection({
     description: schemaZod.string(),
     date: schemaZod.coerce.date(),
     image: schemaZod.string().optional(),
-    tag: schemaZod.string().optional(),
+    tags: schemaZod.string().optional(),
   }),
   transform: async (page, context) => {
     const body = await compileMDX(context, page, {
