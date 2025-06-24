@@ -1,0 +1,133 @@
+export const stack = [
+  {
+    name: 'Warp',
+    description: 'Terminal moderno, baseado em Rust com IA.',
+    affiliate: true,
+    href: 'https://app.warp.dev/referral/24YEQY',
+    featured: true,
+  },
+  {
+    name: 'Cursor',
+    description: 'O editor de código com IA.',
+    href: 'https://www.cursor.com/',
+  },
+  {
+    name: 'ChatGPT',
+    description: 'ChatGPT no seu desktop.',
+    href: 'https://openai.com/chatgpt/mac/',
+  },
+  {
+    name: 'Midjourney',
+    description: 'Geração de imagens com IA.',
+    href: 'https://www.midjourney.com/',
+  },
+  {
+    name: 'LocalCan',
+    description: 'Desenvolvimento .local simplificado.',
+    affiliate: true,
+    href: 'https://www.localcan.com?aff=VMdMv',
+    featured: false,
+  },
+  {
+    name: 'Postmark',
+    description: 'Entrega de email rápida e confiável.',
+    affiliate: true,
+    href: 'https://www.postmarkapp.com?via=8240a3',
+    featured: false,
+  },
+  {
+    name: 'Notion',
+    description: 'Ferramenta de gerenciamento de tarefas e projetos.',
+    href: 'https://www.notion.so/',
+  },
+  {
+    name: 'Hostinger',
+    description: 'Hospedagem de sites simples e acessível.',
+    affiliate: true,
+    href: 'https://hostinger.com.br?REFERRALCODE=EYKMATHEUVUC',
+    featured: true,
+  },
+  {
+    name: 'GitHub Desktop',
+    description: 'Gerenciamento de repositório simples.',
+    href: 'https://github.com/apps/desktop',
+  },
+  {
+    name: 'Postman',
+    description: 'Construa e teste APIs.',
+    href: 'https://www.postman.com/',
+  },
+  {
+    name: 'Untitled UI',
+    description: 'O kit UI mais completo para Figma.',
+    affiliate: true,
+    href: 'https://store.untitledui.com?aff=VMdMv',
+    featured: true,
+  },
+  {
+    name: 'Figma',
+    description: 'Ferramenta de design de interface colaborativa.',
+    href: 'https://www.figma.com/',
+  },
+  {
+    name: 'ImageOptim',
+    description: 'Compressão de imagens sem perda.',
+    href: 'https://imageoptim.com/mac',
+  },
+  {
+    name: 'Unsplash',
+    description: 'Fotos gratuitas, de alta qualidade.',
+    href: 'https://unsplash.com/',
+  },
+  {
+    name: 'LS Graphics',
+    description: 'Mockups premium.',
+    href: 'https://www.ls.graphics/',
+  },
+  {
+    name: 'Typefully',
+    description: 'Ferramentas profissionais para Twitter.',
+    href: 'https://typefully.com',
+  },
+  {
+    name: 'Buffer',
+    description: 'Agendamento simples para Instagram.',
+    href: 'https://buffer.com',
+  },
+  {
+    name: 'Ray.so',
+    description: 'Capturas de tela de trechos de código.',
+    href: 'https://ray.so/',
+    imageHref: 'https://raycast.com/',
+  },
+  {
+    name: 'Wise',
+    description: 'Transferências internacionais de moeda estrangeira.',
+    affiliate: true,
+    href: 'https://wise.com/invite/dic/haydenb95',
+  },
+  {
+    name: 'Spotify',
+    description: 'Aproveite e curate a música do mundo.',
+    href: 'https://open.spotify.com/',
+  },
+  {
+    name: 'Visual Electric',
+    description: 'Geração de imagens realistas com IA.',
+    href: 'https://visualelectric.com/',
+    affiliate: true,
+    featured: false,
+  },
+  {
+    name: 'Cal.com',
+    description: 'Agende suas reuniões com facilidade.',
+    affiliate: true,
+    href: 'https://refer.cal.com/matheusoss',
+    featured: true,
+  },
+  {
+    name: 'Abacate Pay',
+    description: 'Pagamento de contas com cartão de crédito.',
+    href: 'https://abacatepay.com',
+  },
+];

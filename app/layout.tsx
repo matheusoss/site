@@ -1,43 +1,48 @@
-import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import './globals.css'
-import { Providers } from '@/app/providers'
-import { Sidebar } from '@/components/sidebar'
+import { mono, sans } from '@/lib/fonts';
+import './globals.css';
+import { Analytics } from '@vercel/analytics/react';
+import { ThemeProvider } from 'next-themes';
+import type { ReactNode } from 'react';
+import { Toaster } from 'sonner';
+import { Footer } from '@/components/footer';
+import { JsonLd } from '@/components/json-ld';
+import { Navigation } from '@/components/navigation';
+import { ThemeSwitcher } from '@/components/theme-switcher';
+import { WindowsEmojiPolyfill } from '@/components/windows-emoji-polyfill';
+import { cn } from '@/lib/utils';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
+type RootLayoutProps = {
+  children: ReactNode;
+};
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
-
-export const metadata: Metadata = {
-  title: 'Matheus Oliveira',
-  description: 'Software & Data Engineer',
-}
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} whitespace-pre-line h-screen overscroll-none overflow-hidden flex antialiased bg-background`}
+const RootLayout = ({ children }: RootLayoutProps) => (
+  <html className="scroll-smooth" lang="en" suppressHydrationWarning>
+    <body
+      className={cn(
+        sans.variable,
+        mono.variable,
+        'bg-background font-sans text-foreground-light leading-relaxed antialiased'
+      )}
+    >
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        disableTransitionOnChange
+        enableSystem
       >
-        <Providers>
-          <Sidebar />
-          <div className="lg:pl-2 lg:pt-2  bg-neutral-100 dark:bg-neutral-900 flex-1 overflow-y-auto">
-            <div className="flex-1 bg-background min-h-screen lg:rounded-tl-xl border border-transparent lg:border-neutral-200 dark:border-neutral-800 overflow-y-auto">
-              {children}
-            </div>
-          </div>
-        </Providers>
-      </body>
-    </html>
-  )
-}
+        <div className="mx-auto grid max-w-2xl gap-12 px-4 py-8 pb-12 sm:px-8">
+          <Navigation />
+          {children}
+          <Footer />
+        </div>
+        <Toaster />
+        <ThemeSwitcher />
+        <WindowsEmojiPolyfill />
+        <JsonLd />
+        <Analytics />
+      </ThemeProvider>
+    </body>
+  </html>
+);
+
+export default RootLayout;

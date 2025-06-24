@@ -1,101 +1,113 @@
-import { baseUrl } from '@/app/sitemap'
-import { CustomMDX } from '@/components/mdx'
-import { PostAuthor } from '@/components/post-author'
-import { PostStatus } from '@/components/post-status'
-import { getBlogPosts } from '@/lib/blog'
-import type { Metadata } from 'next'
-import Image from 'next/image'
-import { notFound } from 'next/navigation'
+import { allPosts } from 'content-collections';
+import { ArrowLeftToLineIcon } from 'lucide-react';
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import { notFound } from 'next/navigation';
+import { Link } from '@/components/link';
+import { Mdx } from '@/components/mdx';
+import { PostCopyURL } from '@/components/post-copy-url';
+import { PostStatus } from '@/components/post-status';
+import { Section } from '@/components/section';
+import { createMetadata } from '@/lib/metadata';
+import { cn } from '@/lib/utils';
 
-export async function generateStaticParams() {
-  const posts = getBlogPosts()
+type PageProperties = {
+  readonly params: Promise<{
+    slug: string;
+  }>;
+};
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
-}
+export const runtime = 'nodejs';
 
-export async function generateMetadata(props: { params: any }): Promise<Metadata | undefined> {
-  const params = await props.params
-  const post = getBlogPosts().find((post) => post.slug === params.slug)
-  if (!post) {
-    return
+export const generateMetadata = async ({
+  params,
+}: PageProperties): Promise<Metadata> => {
+  const { slug } = await params;
+  const page = allPosts.find((page) => page._meta.path === `blog/${slug}`);
+
+  if (!page) {
+    return {};
   }
 
-  const { title, publishedAt: publishedTime, summary: description, image } = post.metadata
+  return createMetadata({
+    title: page.title,
+    description: page.description,
+    image: `/og?title=${page.title}&description=${page.description}`,
+  });
+};
 
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: 'article',
-      publishedTime,
-      url: `${baseUrl}/blog/${post.slug}`,
-      images: [
-        {
-          url: image || '',
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [image || ''],
-    },
-  }
-}
+export const generateStaticParams = (): { slug: string }[] =>
+  allPosts.map((page) => ({
+    slug: page._meta.path,
+  }));
 
-export default async function Page(props: {
-  params: Promise<{ slug: string }>
-}) {
-  const params = await props.params
+export default async function Page({ params }: PageProperties) {
+  const { slug } = await params;
+  const page = allPosts.find((page) => page._meta.path === `blog/${slug}`);
 
-  const { slug } = params
-
-  const post = getBlogPosts().find((post) => post.slug === slug)
-
-  if (!post) {
-    notFound()
+  if (!page) {
+    notFound();
   }
 
   return (
-    <div className="container max-w-[1140px] flex justify-center">
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BlogPosting',
-            headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
-            image: `${baseUrl}${post.metadata.image}`,
-            url: `${baseUrl}/blog/${post.slug}`,
-          }),
-        }}
-      />
-
-      <article className="max-w-[680px] pt-[80px] md:pt-[150px] w-full">
-        <PostStatus status={post.metadata.tag} />
-
-        <h2 className="font-medium text-2xl mb-6">{post.metadata.title}</h2>
-
-        <div className="updates">
-          {post.metadata.image && (
-            <Image src={post.metadata.image} alt={post.metadata.title} width={680} height={442} className="mb-12" />
+    <>
+      <Section
+        className="-ml-28 absolute mt-1 hidden select-none lg:block"
+        delay={0.6}
+      >
+        <Link
+          className={cn(
+            'flex items-center gap-2 text-nowrap text-foreground-lighter text-xs transition-colors',
+            'hover:text-foreground'
           )}
-          <CustomMDX source={post.content} />
-        </div>
+          href="/blog"
+        >
+          <ArrowLeftToLineIcon size={12} />
+          Blog
+        </Link>
+      </Section>
 
-        <div className="mt-10">
-          <PostAuthor author="matheus" />
+      <Section className="gap-0">
+        <div className="flex items-center gap-0">
+          <PostStatus status={page.tag ?? ''} />
         </div>
+        <h1>{page.title}</h1>
+
+        <p className="text-foreground-lighter">{page.description}</p>
+      </Section>
+      {page.image ? (
+        <Section>
+          <Image
+            alt={page.title}
+            className="overflow-hidden rounded-lg border border-border/50"
+            height={630}
+            priority
+            quality={100}
+            src={page.image}
+            width={1200}
+          />
+        </Section>
+      ) : null}
+      <article className="grid gap-3">
+        <Section delay={0.2}>
+          <Mdx code={page.body} />
+        </Section>
       </article>
-    </div>
-  )
+      <Section delay={0.4}>
+        <div className="flex w-full items-center justify-between border-border border-t py-3 text-foreground-lighter text-sm">
+          <div className="flex flex-col">
+            <span>
+              Publicado em{' '}
+              {new Intl.DateTimeFormat('pt-BR', { dateStyle: 'long' }).format(
+                page.date
+              )}
+            </span>
+            <span>{page.readingTime}</span>
+          </div>
+
+          <PostCopyURL slug={page._meta.path} />
+        </div>
+      </Section>
+    </>
+  );
 }

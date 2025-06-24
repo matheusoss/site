@@ -1,44 +1,48 @@
-'use client'
+'use client';
 
-import { Icons } from '@/components/icons'
-import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { IoCheckmarkDoneOutline } from 'react-icons/io5'
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { IoCheckmarkDoneOutline } from 'react-icons/io5';
+import { Icons } from '@/components/icons';
 
-export function PostCopyURL({ slug }: { slug: string }) {
-  const [isCopied, setCopied] = useState(false)
+export function PostCopyURL() {
+  const [isCopied, setCopied] = useState(false);
 
   const handleClipboard = async () => {
     try {
-      setCopied(true)
+      setCopied(true);
 
-      await navigator.clipboard.writeText(window.location.href)
+      await navigator.clipboard.writeText(window.location.href);
 
       setTimeout(() => {
-        setCopied(false)
-      }, 2000)
+        setCopied(false);
+      }, 2000);
     } catch {}
-  }
+  };
 
   return (
-    <button type="button" onClick={handleClipboard} className="relative flex space-x-2 items-center">
+    <button
+      className="relative flex items-center space-x-2"
+      onClick={handleClipboard}
+      type="button"
+    >
       <motion.div
-        className="absolute -left-4 top-0.3"
-        initial={{ opacity: 1, scale: 1 }}
         animate={{ opacity: isCopied ? 0 : 1, scale: isCopied ? 0 : 1 }}
+        className="-left-4 absolute top-0.3"
+        initial={{ opacity: 1, scale: 1 }}
       >
         <Icons.Copy />
       </motion.div>
 
       <motion.div
-        className="absolute -left-[24px] top-0.3"
-        initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: isCopied ? 1 : 0, scale: isCopied ? 1 : 0 }}
+        className="-left-[24px] absolute top-0.3"
+        initial={{ opacity: 0, scale: 0 }}
       >
         <IoCheckmarkDoneOutline />
       </motion.div>
 
       <span className="text-xs">Copiar link</span>
     </button>
-  )
+  );
 }

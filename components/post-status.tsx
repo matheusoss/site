@@ -1,7 +1,7 @@
 export function PostStatus({ status }: { status: string }) {
   return (
-    <div className="border rounded-full font-mono px-3 py-1.5 inline-block text-[11px] mb-4 text-muted-foreground">
+    <div className="mb-4 rounded-full border px-3 py-1.5 font-mono text-[11px] text-muted-foreground">
       {status}
     </div>
-  )
+  );
 }
