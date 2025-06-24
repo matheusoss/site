@@ -1,6 +1,7 @@
 import { MDXContent } from '@content-collections/mdx/react';
 import Image from 'next/image';
 import type { HTMLProps, ReactNode } from 'react';
+import React from 'react';
 import { Tweet } from 'react-tweet';
 import { Features } from '@/components/features';
 import { Link } from '@/components/link';
@@ -8,6 +9,44 @@ import { Localized } from '@/components/localized';
 import { MailingList } from '@/components/mailing-list';
 import { Stack } from '@/components/stack';
 import { Video } from '@/components/video';
+
+interface TableProps {
+  data: {
+    headers: string[];
+    rows: string[][];
+  };
+}
+
+function Table({ data }: TableProps) {
+  const headers = data.headers.map((header, index) => (
+    <th key={header}>{header}</th>
+  ));
+
+  const rows = data.rows.map((row, rowIndex) => (
+    <tr key={row.join('-')}>
+      {row.map((cell, cellIndex) => (
+        <td key={`${cell}-${cellIndex}`}>{cell}</td>
+      ))}
+    </tr>
+  ));
+
+  return (
+    <table>
+      <thead>
+        <tr>{headers}</tr>
+      </thead>
+      <tbody>{rows}</tbody>
+    </table>
+  );
+}
+
+interface IframeProps extends React.IframeHTMLAttributes<HTMLIFrameElement> {
+  src: string;
+}
+
+function Iframe({ src, ...props }: IframeProps) {
+  return <iframe src={src} {...props} />;
+}
 
 type MdxProperties = {
   readonly code: string;
@@ -50,6 +89,17 @@ const Instagram = ({ reel, caption }: { reel: string; caption: string }) => (
   />
 );
 
+function slugify(str: string): string {
+  return str
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/&/g, '-and-')
+    .replace(/[^\w-]+/g, '')
+    .replace(/--+/g, '-');
+}
+
 const Callout = ({ children }: { children: ReactNode }) => (
   <div className="overflow-hidden rounded-lg bg-gradient-to-tr from-white/0 to-white/20 p-px">
     <div className="rounded-[7px] bg-gradient-to-tr from-black to-neutral-950 p-6">
@@ -58,51 +108,45 @@ const Callout = ({ children }: { children: ReactNode }) => (
   </div>
 );
 
-const h2 = ({ children, ...props }: HTMLProps<HTMLHeadingElement>) => (
-  <h2 {...props}>
-    <span className="mr-2 select-none text-border">##</span>
-    {children}
-  </h2>
-);
+function createHeading(level: number) {
+  const Heading = ({ children }: { children: React.ReactNode }) => {
+    const slug = slugify(children as string);
 
-const h3 = ({ children, ...props }: HTMLProps<HTMLHeadingElement>) => (
-  <h3 {...props}>
-    <span className="mr-2 select-none text-border">###</span>
-    {children}
-  </h3>
-);
+    return React.createElement(
+      `h${level}`,
+      { id: slug },
+      [
+        React.createElement('a', {
+          href: `#${slug}`,
+          key: `link-${slug}`,
+          className: 'anchor',
+        }),
+      ],
+      children
+    );
+  };
 
-const h4 = ({ children, ...props }: HTMLProps<HTMLHeadingElement>) => (
-  <h4 {...props}>
-    <span className="mr-2 select-none text-border">####</span>
-    {children}
-  </h4>
-);
+  Heading.displayName = `Heading${level}`;
 
-const h5 = ({ children, ...props }: HTMLProps<HTMLHeadingElement>) => (
-  <h5 {...props}>
-    <span className="mr-2 select-none text-border">#####</span>
-    {children}
-  </h5>
-);
+  return Heading;
+}
 
-const h6 = ({ children, ...props }: HTMLProps<HTMLHeadingElement>) => (
-  <h6 {...props}>
-    <span className="mr-2 select-none text-border">######</span>
-    {children}
-  </h6>
-);
+const components = {
+  h1: createHeading(1),
+  h2: createHeading(2),
+  h3: createHeading(3),
+  h4: createHeading(4),
+  h5: createHeading(5),
+  h6: createHeading(6),
+  Table,
+  Iframe,
+};
 
 export const Mdx = ({ code }: MdxProperties) => (
   <MDXContent
     code={code}
     components={{
       a,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
       img,
       Video,
       Instagram,
@@ -112,6 +156,7 @@ export const Mdx = ({ code }: MdxProperties) => (
       MailingList,
       Features,
       Localized,
+      ...components,
     }}
   />
 );

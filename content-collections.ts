@@ -60,6 +60,7 @@ const posts = defineCollection({
     description: schemaZod.string(),
     date: schemaZod.coerce.date(),
     image: schemaZod.string().optional(),
+    tag: schemaZod.string().optional(),
   }),
   transform: async (page, context) => {
     const body = await compileMDX(context, page, {

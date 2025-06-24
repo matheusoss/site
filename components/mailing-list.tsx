@@ -4,7 +4,7 @@ import { ArrowRightIcon, Loader2Icon } from 'lucide-react';
 import { Form } from 'radix-ui';
 import { useActionState, useEffect } from 'react';
 import { toast } from 'sonner';
-import { subscribe } from '@/app/[locale]/actions/subscribe';
+import { subscribe } from '@/app/actions/subscribe';
 import { Input } from '@/components/input';
 
 const initialState = {
@@ -37,7 +37,7 @@ export const MailingList = () => {
       <Input
         className="pr-8"
         id="email"
-        label="Email address"
+        label="Email"
         name="email"
         pattern={emailRegex.source}
         placeholder="jane@acme.com"

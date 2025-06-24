@@ -3,9 +3,10 @@ import { ArrowLeftToLineIcon } from 'lucide-react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import type { FC } from 'react';
 import { Link } from '@/components/link';
 import { Mdx } from '@/components/mdx';
+import { PostCopyURL } from '@/components/post-copy-url';
+import { PostStatus } from '@/components/post-status';
 import { Section } from '@/components/section';
 import { createMetadata } from '@/lib/metadata';
 import { cn } from '@/lib/utils';
@@ -40,7 +41,7 @@ export const generateStaticParams = (): { slug: string }[] =>
     slug: page._meta.path,
   }));
 
-const Page: FC<PageProperties> = async ({ params }) => {
+export default async function Page({ params }: PageProperties) {
   const { slug } = await params;
   const page = allPosts.find((page) => page._meta.path === `blog/${slug}`);
 
@@ -65,8 +66,13 @@ const Page: FC<PageProperties> = async ({ params }) => {
           Blog
         </Link>
       </Section>
+
       <Section className="gap-0">
+        <div className="flex items-center gap-0">
+          <PostStatus status={page.tag ?? ''} />
+        </div>
         <h1>{page.title}</h1>
+
         <p className="text-foreground-lighter">{page.description}</p>
       </Section>
       {page.image ? (
@@ -87,20 +93,21 @@ const Page: FC<PageProperties> = async ({ params }) => {
           <Mdx code={page.body} />
         </Section>
       </article>
-      <Section
-        className="grid gap-1 text-foreground-lighter text-sm"
-        delay={0.4}
-      >
-        <p>
-          Published on{' '}
-          {new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(
-            page.date
-          )}
-        </p>
-        <p>{page.readingTime}</p>
+      <Section delay={0.4}>
+        <div className="flex w-full items-center justify-between border-border border-t py-3 text-foreground-lighter text-sm">
+          <div className="flex flex-col">
+            <span>
+              Publicado em{' '}
+              {new Intl.DateTimeFormat('pt-BR', { dateStyle: 'long' }).format(
+                page.date
+              )}
+            </span>
+            <span>{page.readingTime}</span>
+          </div>
+
+          <PostCopyURL slug={page._meta.path} />
+        </div>
       </Section>
     </>
   );
-};
-
-export default Page;
+}

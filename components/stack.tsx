@@ -25,7 +25,7 @@ export const Stack = () => {
             onClick={() => setOpen(true)}
             type="button"
           >
-            Show more tools...
+            Ver mais ferramentas...
           </button>
           <Link
             aria-label="Logo API"

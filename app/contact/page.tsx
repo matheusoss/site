@@ -5,14 +5,14 @@ import { Link } from '@/components/link';
 import { Section } from '@/components/section';
 import { createMetadata } from '@/lib/metadata';
 
-const title = 'Contact';
+const title = 'Contato';
 const email = 'matheusoss@hotmail.com';
-const description = `Contact me by email ${email} or schedule a meeting.`;
+const description = `Entre em contato comigo por email ${email} ou agende uma reunião.`;
 
 export const metadata: Metadata = createMetadata({
   title,
   description,
-  ogText: 'Want to chat about something? Get in touch.',
+  ogText: 'Quer conversar sobre algo? Entre em contato.',
 });
 
 export default function Contact() {
@@ -21,8 +21,8 @@ export default function Contact() {
       <Section className="gap-0">
         <h1>{title}</h1>
         <p className="text-foreground-lighter">
-          Contact me by email <Link href={`mailto:${email}`}>{email}</Link> or
-          schedule a meeting.
+          Entre em contato comigo por email{' '}
+          <Link href={`mailto:${email}`}>{email}</Link> ou agende uma reunião.
         </p>
       </Section>
 

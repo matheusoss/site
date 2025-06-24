@@ -36,7 +36,7 @@ export const Features = () => {
           onClick={() => setOpen(true)}
           type="button"
         >
-          and more...
+          Ver mais...
         </button>
       )}
     </>
